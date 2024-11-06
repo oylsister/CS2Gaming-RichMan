@@ -1,4 +1,5 @@
-﻿using CounterStrikeSharp.API;
+﻿using System.Globalization;
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Core.Capabilities;
@@ -93,8 +94,9 @@ namespace RichMan
             {
                 var count = data.Cash;
                 var complete = data.Complete;
+                var timeReset = DateTime.ParseExact(data.TimeReset, "M/d/yyyy", CultureInfo.InvariantCulture);
 
-                if (data.TimeReset == DateTime.Today.ToShortDateString())
+                if (timeReset <= DateTime.Today)
                 {
                     count = 0;
                     complete = false;
